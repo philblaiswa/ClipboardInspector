@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter clipboardItemsAdapter;
     private ListView clipboardItemsListView;
     private ImageView imageView;
+    private static final int IMAGE_PICKER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +58,26 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         });
 
+        findViewById(R.id.button_set_clip_image).setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICKER);
+        });
+
         clipboardItemsAdapter = new ArrayAdapter<String>(this, R.layout.listview_single_item, clipboardLogItems);
         clipboardItemsListView = findViewById(R.id.log_items__list);
         clipboardItemsListView.setAdapter(clipboardItemsAdapter);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == IMAGE_PICKER) {
+            ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setPrimaryClip(ClipData.newUri(getContentResolver(), "Image from phone", data.getData()));
+        }
     }
 
     private void notifyDataSetChanged() {
