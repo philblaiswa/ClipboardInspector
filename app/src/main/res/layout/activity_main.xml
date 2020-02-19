@@ -20,14 +20,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp">
 
-        <Button
-            android:id="@+id/button_get_primary_clip"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="Read Clipboard"
-            />
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/button_get_primary_clip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Read Clipboard"
+                />
+            <Button
+                android:id="@+id/button_set_clip_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Write Clipboard"
+                />
+        </LinearLayout>
         <ImageView
             android:id="@+id/image"
             android:layout_width="80sp"
