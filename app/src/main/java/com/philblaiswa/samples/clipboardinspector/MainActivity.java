@@ -64,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICKER);
         });
 
+        findViewById(R.id.button_set_html_image).setOnClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+            final String text = "https://www.microsoft.com/";
+            final String html = "<a href=\"https://www.microsoft.com/\">Microsoft - Official Home Page</a>";
+            clipboard.setPrimaryClip(ClipData.newHtmlText(null, text, html));
+        });
+
         clipboardItemsAdapter = new ArrayAdapter<String>(this, R.layout.listview_single_item, clipboardLogItems);
         clipboardItemsListView = findViewById(R.id.log_items__list);
         clipboardItemsListView.setAdapter(clipboardItemsAdapter);

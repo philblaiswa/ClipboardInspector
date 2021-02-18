@@ -38,7 +38,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Write Clipboard"
+                android:text="Write image to Clipboard"
+                />
+            <Button
+                android:id="@+id/button_set_html_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Write HTML to Clipboard"
                 />
         </LinearLayout>
         <ImageView
